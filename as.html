@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+</head>
+<body>
+  <div id="login-page">
+    <h2>Welcome to our Website</h2>
+    <div id="login-form">
+      <h2>User Login</h2>
+      <form id="login-form" onsubmit="loginUser(event)">
+        <label for="login-username">User Name:</label><br>
+        <input type="text" id="login-username" required><br>
+        <label for="login-password">Password:</label><br>
+        <input type="password" id="login-password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <button onclick="showRegistrationForm()">Register</button>
+  </div>
+
+  <div id="home-page" style="display: none;">
+    <h2>Welcome, <span id="user-welcome"></span>!</h2>
+    <h3>Book Services</h3>
+    <ul>
+      <li><a href="#">Service 1</a></li>
+      <li><a href="#">Service 2</a></li>
+      <li><a href="#">Service 3</a></li>
+      <!-- Add more services as needed -->
+    </ul>
+  </div>
+
+  <div id="registration-form" style="display: none">
+    <h2>User Registration</h2>
+    <form id="register-form" onsubmit="registerUser(event)">
+      <label for="reg-username">User Name:</label><br>
+      <input type="text" id="reg-username" maxlength="50" required><br>
+      <label for="reg-email">Email:</label><br>
+      <input type="email" id="reg-email" required><br>
+      <label for="reg-password">Password:</label><br>
+      <input type="password" id="reg-password" maxlength="30" required><br>
+      <label for="reg-address">Address:</label><br>
+      <textarea id="reg-address" maxlength="100"></textarea><br>
+      <label for="reg-contact">Contact Number:</label><br>
+      <input type="tel" id="reg-contact" maxlength="10"><br>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <div id="acknowledgment" style="display: none">
+    <h2>Registration Acknowledgment</h2>
+    <p id="success-message" style="color: green">User Registration successful</p>
+    <p>User ID: <span id="ack-user-id"></span></p>
+    <p>User Name: <span id="ack-username"></span></p>
+    <p>Email: <span id="ack-email"></span></p>
+  </div>
+
+  <script>
+    function showRegistrationForm() {
+      document.getElementById("login-page").style.display = "none";
+      document.getElementById("registration-form").style.display = "block";
+    }
+
+    function registerUser(event) {
+      event.preventDefault();
+      var username = document.getElementById("reg-username").value;
+      var email = document.getElementById("reg-email").value;
+      var userId = Math.floor(Math.random() * 1000000);
+      document.getElementById("registration-form").style.display = "none";
+      document.getElementById("acknowledgment").style.display = "block";
+      document.getElementById("ack-user-id").innerText = userId;
+      document.getElementById("ack-username").innerText = username;
+      document.getElementById("ack-email").innerText = email;
+    }
+
+    function loginUser(event) {
+      event.preventDefault();
+     
+      var username = document.getElementById("login-username").value;
+      document.getElementById("login-page").style.display = "none";
+      document.getElementById("home-page").style.display = "block";
+      document.getElementById("user-welcome").innerText = username;
+    }
+  </script>
+</body>
+</html>

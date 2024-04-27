@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login-form">
+        <h2>User Login</h2>
+        <form id="login-form" onsubmit="loginUser(event)">
+            <label for="login-username">User Name:</label><br>
+            <input type="text" id="login-username" required><br>
+            <label for="login-password">Password:</label><br>
+            <input type="password" id="login-password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="service-history" style="display: none;">
+        <h2>Service History</h2>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>User/Customer ID</th>
+                    <th>User Name</th>
+                    <th>Service ID</th>
+                    <th>Date</th>
+                    <th>Slot</th>
+                    <th>Type of Service</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="history-body">
+                <tr>
+                    <td>C001</td>
+                    <td>John Doe</td>
+                    <td>S001</td>
+                    <td>2024-04-25</td>
+                    <td>Morning</td>
+                    <td>Cleaning</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>C002</td>
+                    <td>Alice Smith</td>
+                    <td>S002</td>
+                    <td>2024-04-26</td>
+                    <td>Afternoon</td>
+                    <td>Gardening</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>C003</td>
+                    <td>Bob Johnson</td>
+                    <td>S003</td>
+                    <td>2024-04-27</td>
+                    <td>Evening</td>
+                    <td>Plumbing</td>
+                    <td>Scheduled</td>
+                </tr>
+                <tr>
+                    <td>C004</td>
+                    <td>Emma Brown</td>
+                    <td>S004</td>
+                    <td>2024-04-28</td>
+                    <td>Morning</td>
+                    <td>Electrical</td>
+                    <td>Completed</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="pagination">
+            <a href="#" id="prev-page">&lt; Prev</a>
+            <a href="#" id="next-page">Next &gt;</a>
+        </div>
+    </div>
+
+    <script>
+        function loginUser(event) {
+            event.preventDefault();
+
+            var loginUsername = document.getElementById('login-username').value;
+            var loginPassword = document.getElementById('login-password').value;
+            alert('Login Successful!\nUsername: ' + loginUsername + '\nPassword: ' + loginPassword);
+
+            showServiceHistory();
+        }
+
+        function showServiceHistory() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('service-history').style.display = 'block';
+        }
+
+        document.getElementById('prev-page').addEventListener('click', function (event) {
+            event.preventDefault();
+            document.getElementById('history-table').style.display = 'none';
+            document.getElementById('history-body').innerHTML = '';
+            document.getElementById('history-body').innerHTML = `
+                <tr>
+                    <td>C001</td>
+                    <td>John Doe</td>
+                    <td>S001</td>
+                    <td>2024-04-25</td>
+                    <td>Morning</td>
+                    <td>Cleaning</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>C002</td>
+                    <td>Alice Smith</td>
+                    <td>S002</td>
+                    <td>2024-04-26</td>
+                    <td>Afternoon</td>
+                    <td>Gardening</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>C003</td>
+                    <td>Bob Johnson</td>
+                    <td>S003</td>
+                    <td>2024-04-27</td>
+                    <td>Evening</td>
+                    <td>Plumbing</td>
+                    <td>Scheduled</td>
+                </tr>
+                <tr>
+                    <td>C004</td>
+                    <td>Emma Brown</td>
+                    <td>S004</td>
+                    <td>2024-04-28</td>
+                    <td>Morning</td>
+                    <td>Electrical</td>
+                    <td>Completed</td>
+                </tr>`;
+            document.getElementById('history-table').style.display = 'table';
+        });
+
+        document.getElementById('next-page').addEventListener('click', function (event) {
+            event.preventDefault();
+            document.getElementById('history-table').style.display = 'none';
+            document.getElementById('history-body').innerHTML = '';
+            document.getElementById('history-body').innerHTML = `
+               <tr>
+                    <td>C005</td>
+                    <td>Michael Davis</td>
+                    <td>S005</td>
+                    <td>2024-04-29</td>
+                    <td>Afternoon</td>
+                    <td>Painting</td>
+                    <td>In Progress</td>
+                </tr>
+
+                <tr>
+                    <td>C006</td>
+                    <td>Sophia Wilson</td>
+                    <td>S006</td>
+                    <td>2024-04-30</td>
+                    <td>Evening</td>
+                    <td>Cleaning</td>
+                    <td>Scheduled</td>
+                </tr>
+                <tr>
+                    <td>C007</td>
+                    <td>James Lee</td>
+                    <td>S007</td>
+                    <td>2024-05-01</td>
+                    <td>Morning</td>
+                    <td>Gardening</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>C008</td>
+                    <td>Olivia Taylor</td>
+                    <td>S008</td>
+                    <td>2024-05-02</td>
+                    <td>Afternoon</td>
+                    <td>Plumbing</td>
+                    <td>In Progress</td>
+                </tr>`;
+            document.getElementById('history-table').style.display = 'table';
+        });
+    </script>
+</body>
+
+</html>

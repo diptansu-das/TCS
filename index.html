@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    .card {
+      display: inline-block;
+      width: 200px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .card-text {
+      padding: 10px;
+      text-align: center;
+      background-color: #f8f8f8;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-page">
+    <h2>Welcome to our Website</h2>
+    <div id="login-form">
+      <h2>User Login</h2>
+      <form id="loginForm" onsubmit="loginUser(event)">
+        <label for="login-username">User Name:</label><br>
+        <input type="text" id="login-username" required><br>
+        <label for="login-password">Password:</label><br>
+        <input type="password" id="login-password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+   
+  </div>
+
+  <div id="home-page" style="display: none;">
+    <h2>Welcome, <span id="user-welcome"></span>!</h2>
+    <div id="service-selection">
+      <h3>Select Service</h3>
+      <div class="card" onclick="selectService('AC')">
+        <img src="https://chillsairconditioning.com/wp-content/uploads/2021/05/The-Demand-for-AC-Repair-in-Miami-FL-Is-Huge.jpg" alt="AC & Appliances Repair">
+        <div class="card-text">AC & Appliances Repair</div>
+      </div>
+      <div class="card" onclick="selectService('HouseCleaning')">
+        <img src="https://scrubnbubbles.com/wp-content/uploads/2021/01/how-to-clean-your-house-fast.jpg" alt="House Cleaning">
+        <div class="card-text">House Cleaning</div>
+      </div>
+      <div class="card" onclick="selectService('VehicleRepair')">
+        <img src="https://th.bing.com/th/id/R.770fb86dc85ac4c249054c9d94c5dd8a?rik=lvKXEXwlRRCPFw&riu=http%3a%2f%2fwww.snapp.cc%2fwp-content%2fuploads%2f2020%2f03%2fCar-Service-station.jpg&ehk=SHicnj1k1xx2IOYC4ZFROVGEKW84l%2bcWvwFtB3jKWhg%3d&risl=&pid=ImgRaw&r=0" alt="Vehicle Repair Service">
+        <div class="card-text">Vehicle Repair Service</div>
+      </div>
+      <div class="card" onclick="selectService('ProductPickupDrop')">
+        <img src="https://th.bing.com/th/id/OIP.Z-GkDx74J4yOQ0Ux4hypoAHaE8?rs=1&pid=ImgDetMain" alt="Product Pickup & Drop Service">
+        <div class="card-text">Product Pickup & Drop Service</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="service" style="display: none;">
+    <h2><span id="service-name"></span> Service</h2>
+    <form id="service-form" onsubmit="bookService(event, 'AC')">
+      <label for="service-date">Date/Slot:</label><br>
+      <input type="date" id="service-date" required><br>
+      <label for="service-address">Address:</label><br>
+      <textarea id="service-address" maxlength="100" required></textarea><br>
+      <label for="service-vendor">Vendor Selection:</label><br>
+      <select id="service-vendor" required>
+        <option value="">Select Vendor</option>
+        <option value="Vendor 1">Vendor 1</option>
+        <option value="Vendor 2">Vendor 2</option>
+        <option value="Vendor 3">Vendor 3</option>
+      </select><br>
+      <label for="service-amount">Amount:</label><br>
+      <input type="text" id="service-amount" value="100" readonly><br>
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+
+  
+
+  <div id="acknowledgment" style="display: none">
+    <h2>Booking Acknowledgment</h2>
+    <p id="booking-success" style="color: green">Service Booked successfully</p>
+    <p>Service ID: <span id="booking-service-id"></span></p>
+    <p>Vendor Name: <span id="booking-vendor"></span></p>
+    <p>Date/Slot: <span id="booking-date-slot"></span></p>
+  </div>
+
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+      var username = document.getElementById("login-username").value;
+      document.getElementById("login-page").style.display = "none";
+      document.getElementById("home-page").style.display = "block";
+      document.getElementById("user-welcome").innerText = username;
+    }
+
+    function selectService(service) {
+      document.getElementById("home-page").style.display = "none";
+      document.getElementById("service").style.display = "block";
+      document.getElementById("service-name").innerText =service;
+
+
+
+    }
+
+    function bookService(event, service) {
+      event.preventDefault();
+      var serviceId = Math.floor(Math.random() * 1000000);
+      var vendor = document.getElementById("service-vendor").value;
+      var dateSlot = document.getElementById("service-date").value;
+      document.getElementById("service").style.display = "none";
+      document.getElementById("acknowledgment").style.display = "block";
+      document.getElementById("booking-success").innerText = "Service Booked successfully";
+      document.getElementById("booking-service-id").innerText = serviceId;
+      document.getElementById("booking-vendor").innerText = vendor;
+      document.getElementById("booking-date-slot").innerText = dateSlot;
+    }
+  </script>
+</body>
+</html>
